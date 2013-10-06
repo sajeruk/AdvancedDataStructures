@@ -1,8 +1,9 @@
 // created by Maxim Busel @sajeruk
 #ifndef STACK_WITH_MAX_H
 #define STACK_WITH_MAX_H
-#include <algorithm>
+
 #include <stack>
+#include <algorithm>
 
 template <typename T, typename Comparator = std::less<T>>
 class StackWithExtremal

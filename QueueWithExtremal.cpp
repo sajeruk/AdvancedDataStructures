@@ -1,3 +1,4 @@
+// created by Maxim Busel @sajeruk
 #include "QueueWithExtremal.h"
 
 template <typename T, typename Comparator>
