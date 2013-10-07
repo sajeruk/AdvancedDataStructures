@@ -12,7 +12,7 @@ public:
 
   void enqueue(const T& element);
   const T& extremum() const;
-  const T& front(); // should be const, but it doesnt't compile
+  const T& front() const;
   void dequeue();
   bool empty() const;
 

@@ -3,30 +3,31 @@
 
 template <typename T, typename Comparator>
 void QueueWithExtremal<T, Comparator>::enqueue(const T& element) {
-  tail_.push(element);
+  if(empty())
+    head_.push(element);
+  else
+    tail_.push(element);
 }
 
 template <typename T, typename Comparator>
 const T& QueueWithExtremal<T, Comparator>::extremum() const {
 
-  if (head_.empty()) {
+  if (empty()) {
+    throw std::logic_error("No extremum in empty queue");
+  } else if (head_.empty()) {
     return tail_.extremum();
   } else if (tail_.empty()) {
     return head_.extremum();
-  } else if (empty()) {
-    throw std::logic_error("No extremum in empty queue");
   } else {
     return std::min(head_.extremum(), tail_.extremum(), Comparator());
   }
 }
 
 template <typename T, typename Comparator>
-const T& QueueWithExtremal<T, Comparator>::front() {
+const T& QueueWithExtremal<T, Comparator>::front() const {
   if (head_.empty()) {
-      if (tail_.empty())
         throw std::logic_error("No front"
         "element in empty queue");
-      transfer_();
   }
   return head_.top();
 }
@@ -34,15 +35,18 @@ const T& QueueWithExtremal<T, Comparator>::front() {
 template <typename T, typename Comparator>
 void QueueWithExtremal<T, Comparator>::dequeue() {
   if (head_.empty()) {
-    if (tail_.empty())
-      throw std::logic_error("Cannot dequeue empty queue");
-    transfer_();      
+    throw std::logic_error("Cannot dequeue empty queue");        
   }
   head_.pop();
+  if (head_.empty())
+    transfer_();
 }
 
 template <typename T, typename Comparator>
 void QueueWithExtremal<T, Comparator>::transfer_() {
+  if(tail_.empty())
+    return;
+
   head_.push(tail_.top());
   tail_.pop();
 

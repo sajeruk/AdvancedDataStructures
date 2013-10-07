@@ -33,3 +33,4 @@ void StackWithExtremal<T, Comparator>::pop() {
   stack_.pop();
   stackMin_.pop();
 }
+
